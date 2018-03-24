@@ -6,9 +6,9 @@ const user = '@RealJonAhNee'
 const bot = new Twit(config);
 
 // stream that tracks user
-// const stream = bot.stream('statuses/filter', {
-//   track: user
-// })
+const stream = bot.stream('statuses/filter', {
+  track: user
+})
 
 // bot.post('statuses/update', {
 //   status: 'hello world!'
@@ -43,7 +43,26 @@ const bot = new Twit(config);
 //   }
 // })
 
-// monitor and log tweet to user
+// monitor incoming tweets, pull friendship info
 // stream.on('tweet', t => {
-//   console.log(`${t.text}\n`)
+//   console.log(t)
+//   bot.get('friendships/lookup', {
+//     screen_name: t.user.name
+//   }, (err, data, res) => {
+//     if (err) {
+//       console.log(err)
+//     } else {
+//       console.log(data)
+//     }
+//   })
 // })
+
+// stream.on('connect', res => {
+//   console.log('stream connected');
+// });
+
+// stream.on('disconnect', res => {
+//   console.log('stream disconnected');
+// });
+
+// stream.on('reconnect', )
