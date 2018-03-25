@@ -64,5 +64,3 @@ const stream = bot.stream('statuses/filter', {
 // stream.on('disconnect', res => {
 //   console.log('stream disconnected');
 // });
-
-// stream.on('reconnect', )
