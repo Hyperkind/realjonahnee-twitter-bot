@@ -5,10 +5,40 @@ const user = '@RealJonAhNee'
 
 const bot = new Twit(config);
 
-// stream that tracks user
-const stream = bot.stream('statuses/filter', {
-  track: user
+const searchParams = {
+  q: 'nodejs, NodeJs, javascript, devops, developer',
+  result_type: 'recent',
+  count: 5
+}
+
+const retweet = () => {bot.get('search/tweets', searchParams, (err, data, res) => {
+  if (err) {
+    console.log(err)
+  } else {
+    let ranNum = Math.floor(Math.random() * 10) + 1
+    let retweetId = data.statuses[ranNum].id_str;
+
+    bot.post('statuses/retweet/:id', {
+      id: retweetId,
+    }, (err, res) => {
+      if (err) {
+        console.log(err.message)
+      } else {
+        console.log('retweeted!')
+      }
+    })
+  }
 })
+}
+
+retweet();
+
+setInterval(retweet, 60000);
+
+// stream that tracks user
+// const stream = bot.stream('statuses/filter', {
+//   track: user
+// })
 
 // bot.post('statuses/update', {
 //   status: 'hello world!'
